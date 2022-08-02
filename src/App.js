@@ -28,7 +28,7 @@ const AnecdoteList = ({ anecdotes }) => (
 const Anecdote=({anec})=>{
 return(<div>
   <h2>{anec.content}</h2> 
-  <p>has {anec.votes} votes</p>
+  <p>has {anec.votes} votes <button onClick={()=>{}}>vote</button></p>
   <p>for more info see <a href={`${anec.info}`}>{anec.info}</a></p>
 </div>)
 
@@ -156,7 +156,7 @@ const App = () => {
    
     <div>
       <h1>بسم الله الرحمن الرحيم</h1>
-      <h3>Software anecdotes</h3>
+      <h3>Software anecdotes ex 7.1-7.3</h3>
       <Menu />
       {notification?<Notify msg={notification}/>:null}
       <Routes>
