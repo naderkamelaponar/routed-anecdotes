@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  Routes, Route, Link ,useNavigate,useMatch,Navigate
+  Routes, Route, Link ,useNavigate,useMatch
 } from "react-router-dom"
 import { useField } from './hooks'
 const Menu = () => {
@@ -25,8 +25,9 @@ const AnecdoteList = ({ anecdotes }) => (
     </ul>
   </div>
 )
+let timeOut
 const Anecdote=({anec , vote })=>{
-  if (!anec) return  <Navigate replace to="/" />
+  if (!anec)   return (<h3>Not Found !</h3>)
   const handleVote=()=>{
     vote(anec.id)
   }
@@ -113,7 +114,7 @@ const Notify =({msg})=>{
   }
   return <h3 style={notifyStyle}>{msg}</h3>
 }
-let timeOut
+
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -134,9 +135,8 @@ const App = () => {
 
   const [notification, setNotification] = useState('')
   const match = useMatch("/anecdotes/:id")
-  const anec = match? anecdotes.forEach(a => {
-    if(a.id===Number(match.params.id)) return a
-  }):[]
+  const anec = match?anecdotes.find((a)=>{
+     return a.id===Number(match.params.id)?a:null }):null
   const notify =(msg,seconds=5)=>{
     clearTimeout(timeOut)
     setNotification(msg)
@@ -167,7 +167,7 @@ const App = () => {
    
     <div>
       <h1>بسم الله الرحمن الرحيم</h1>
-      <h3>Software anecdotes ex 7.4-7.6</h3>
+      <h3>Software anecdotes ex 7.1-7.3</h3>
       <Menu />
       {notification?<Notify msg={notification}/>:null}
       <Routes>
